@@ -2,18 +2,18 @@ provider "google"{
     project = "antonucci-devops-iac"
     region = "us-central1"
     zone = "us-central1-c"
-    credentials = "${file("serviceaccount.yaml")}"
+    credentials = "${file("serviceaccount.yaml")}" // Inserir o arquivo o .gitignore para que o mesmo não vá para o git
 
 }
 
 resource "google_folder" "Financeiro" {
     display_name = "Financeiro"
-    parent = "organizations/1092836737584"
+    parent = "organizations/1092836737584" // Localizar o ID da Organização no Gerenciamento de Recursos
 }
 
 resource "google_folder" "Software" {
     display_name = "Software"
-    parent = "organizations/1092836737584"
+    parent = "organizations/1092836737584" // Localizar o ID da Organização no Gerenciamento de Recursos
 }
 
 
@@ -35,18 +35,18 @@ resource "google_folder" "Producao" {
     parent = google_folder.Salesforce.name
 }
 
-resource "google_project" "jairoantonucci-financeiro-salesforce-dev" {
-    name = "jairoantonucci-financeiro-salesforce-dev"
-    project_id = "jairoantonucci-financeiro-salesforce-dev"
+resource "google_project" "antonucci-salesforce-dev" {
+    name = "antonucci-salesforce-dev"
+    project_id = "antonucci-salesforce-dev"
     folder_id = google_folder.Desenvolvimento.name
     auto_create_network = false
-    billing_account = "01D486-702065-1AE669"
+    billing_account = "01D486-702065-1AE669" // Localizar o ID do Billing Account
 
 }
 
-resource "google_project" "jairoantonucci-financeiro-salesforce-prod" {
-    name = "jairoantonucci-financeiro-salesforce-prod"
-    project_id = "jairoantonucci-financeiro-salesforce-prod"
+resource "google_project" "antonucci-salesforce-prod" {
+    name = "antonucci-salesforce-prod"
+    project_id = "antonucci-salesforce-prod"
     folder_id = google_folder.Producao.name
     auto_create_network = false
     billing_account = "01D486-702065-1AE669"
@@ -60,28 +60,28 @@ resource "google_folder" "SAP" {
     parent = google_folder.Financeiro.name
 }
 
-resource "google_folder" "Desenvolvimento" {
+resource "google_folder" "Desenvolvimento3" {
     display_name = "Desenvolvimento"
     parent = google_folder.SAP.name
 }
 
-resource "google_folder" "Producao" {
+resource "google_folder" "Producao3" {
     display_name = "Producao"
     parent = google_folder.SAP.name
 }
 
-resource "google_project" "jairoantonucci-financeiro-sap-dev" {
-    name = "jairoantonucci-financeiro-sap-dev"
-    project_id = "jairoantonucci-financeiro-sap-dev"
+resource "google_project" "antonucci-sap-dev" {
+    name = "antonucci-sap-dev"
+    project_id = "antonucci-sap-dev"
     folder_id = google_folder.Desenvolvimento.name
     auto_create_network = false
     billing_account = "01D486-702065-1AE669"
 
 }
 
-resource "google_project" "jairoantonucci-financeiro-sap-prod" {
-    name = "jairoantonucci-financeiro-sap-prod"
-    project_id = "jairoantonucci-financeiro-sap-prod"
+resource "google_project" "antonucci-sap-prod" {
+    name = "antonucci-sap-prod"
+    project_id = "antonucci-sap-prod"
     folder_id = google_folder.Producao.name
     auto_create_network = false
     billing_account = "01D486-702065-1AE669"
@@ -97,28 +97,28 @@ resource "google_folder" "BackEnd" {
     parent = google_folder.Software.name
 }
 
-resource "google_folder" "Desenvolvimento" {
+resource "google_folder" "Desenvolvimento2" {
     display_name = "Desenvolvimento"
     parent = google_folder.BackEnd.name
 }
 
-resource "google_folder" "Producao" {
+resource "google_folder" "Producao2" {
     display_name = "Producao"
     parent = google_folder.BackEnd.name
 }
 
-resource "google_project" "jairoantonucci-software-backend-dev" {
-    name = "jairoantonucci-software-backend-dev"
-    project_id = "jairoantonucci-software-backend-dev"
+resource "google_project" "antonucci-backend-dev" {
+    name = "antonucci-backend-dev"
+    project_id = "antonucci-backend-dev"
     folder_id = google_folder.Desenvolvimento.name
     auto_create_network = false
     billing_account = "01D486-702065-1AE669"
 
 }
 
-resource "google_project" "jairoantonucci-software-backend-prod" {
-    name = "jairoantonucci-software-backend-prod"
-    project_id = "jairoantonucci-software-backend-prod"
+resource "google_project" "antonucci-backend-prod" {
+    name = "antonucci-backend-prod"
+    project_id = "antonucci-backend-prod"
     folder_id = google_folder.Producao.name
     auto_create_network = false
     billing_account = "01D486-702065-1AE669"
@@ -132,28 +132,28 @@ resource "google_folder" "FrontEnd" {
     parent = google_folder.Software.name
 }
 
-resource "google_folder" "Desenvolvimento" {
+resource "google_folder" "Desenvolvimento1" {
     display_name = "Desenvolvimento"
     parent = google_folder.FrontEnd.name
 }
 
-resource "google_folder" "Producao" {
+resource "google_folder" "Producao1" {
     display_name = "Producao"
     parent = google_folder.FrontEnd.name
 }
 
-resource "google_project" "jairoantonucci-software-frontend-dev" {
-    name = "jairoantonucci-software-frontend-dev"
-    project_id = "jairoantonucci-software-frontend-dev"
+resource "google_project" "antonucci-frontend-dev" {
+    name = "antonucci-frontend-dev"
+    project_id = "antonucci-frontend-dev"
     folder_id = google_folder.Desenvolvimento.name
     auto_create_network = false
     billing_account = "01D486-702065-1AE669"
 
 }
 
-resource "google_project" "jairoantonucci-software-frontend-prod" {
-    name = "jairoantonucci-software-frontend-prod"
-    project_id = "jairoantonucci-software-frontend-prod"
+resource "google_project" "antonucci-frontend-prod" {
+    name = "antonucci-frontend-prod"
+    project_id = "antonucci-frontend-prod"
     folder_id = google_folder.Producao.name
     auto_create_network = false
     billing_account = "01D486-702065-1AE669"
